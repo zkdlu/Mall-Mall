@@ -1,0 +1,5 @@
+package com.zkdlu.mnm.user.dto;
+
+public class User {
+
+}

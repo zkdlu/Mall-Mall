@@ -1,0 +1,21 @@
+package com.zkdlu.mnm.user.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zkdlu.mnm.user.dao.UserDao;
+import com.zkdlu.mnm.user.dto.User;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	UserDao userDao;
+	
+	public List<User> getUserList() {
+		return userDao.userList();
+	}
+}

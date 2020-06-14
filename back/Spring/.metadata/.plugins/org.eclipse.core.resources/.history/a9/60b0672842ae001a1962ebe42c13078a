@@ -1,0 +1,9 @@
+package com.zkdlu.mnm.user.dto;
+
+public class User {
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+}

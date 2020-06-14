@@ -1,0 +1,11 @@
+package com.zkdlu.mnm.user.dao;
+
+import java.util.List;
+
+import com.zkdlu.mnm.user.dto.User;
+
+public class UserDao {
+	public List<User> userList() {
+		return null;
+	}
+}

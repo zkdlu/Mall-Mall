@@ -1,0 +1,13 @@
+package com.zkdlu.mnm.user.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class UserController {
+	
+	@RequestMapping(value = "/users")
+	public Map<String, Object> getUserList() {
+		
+	}
+
+}

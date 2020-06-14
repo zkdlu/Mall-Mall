@@ -1,0 +1,5 @@
+package com.zkdlu.mnm.user.service;
+
+public class UserService {
+
+}
