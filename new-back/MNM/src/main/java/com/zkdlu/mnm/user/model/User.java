@@ -5,37 +5,90 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-    
-	@Column(name = "name")
-	private String name;
+	private int pk;
 
-	public User(String name) {
-		this.setName(name);
+	@Column(name = "id")
+	private String id;
+
+	@Column(name = "passwd")
+	private String passwd;
+
+	@Column(name = "gender")
+	private int gender;
+
+	@Column(name = "homeAddress")
+	private String homeAddress;
+
+	@Column(name = "phoneNum")
+	private String phoneNum;
+
+	@Column(name = "state")
+	private int state;
+
+	public int getPk() {
+		return pk;
 	}
-	protected User() {
+
+	public void setPk(int pk) {
+		this.pk = pk;
 	}
-    
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getPasswd() {
+		return passwd;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public String getHomeAddress() {
+		return homeAddress;
+	}
+
+	public void setHomeAddress(String homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 }
