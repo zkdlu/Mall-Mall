@@ -2,7 +2,6 @@ package com.zkdlu.mnm.user.controller;
 
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,5 +28,10 @@ public class UserController {
 	@PostMapping(path = "/join")
 	public boolean join(@RequestBody UserDTO userDTO) {
 		return userService.join(userDTO);
+	}
+	
+	@PostMapping(path ="/login")
+	public boolean login() {
+		return true;
 	}
 }
