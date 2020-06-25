@@ -8,4 +8,6 @@ import com.zkdlu.mnm.user.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	List<User> findById(String id);
+	
+	List<User> findByIdAndState(String id, int state);
 }

@@ -30,8 +30,13 @@ public class UserController {
 		return userService.join(userDTO);
 	}
 	
+	//public boolean login(@RequestParam("user_id") String id, @RequestParam("passwd") String passwd) {
 	@PostMapping(path ="/login")
-	public boolean login() {
-		return true;
+	public boolean login(@RequestBody UserDTO userDTO) {
+		// user_id와 passwd를 인자로 받아온다.
+		String id = userDTO.getUser_id();
+		String passwd = userDTO.getPasswd();
+		
+		return userService.isMatchUser(id,passwd);
 	}
 }
