@@ -1,2 +1,2 @@
 # Mall-Mall
-AWS, Spring, JPA, React.js, MariaDB, etc..
+AWS, Spring, Spring Boot, JPA, React.js, MariaDB, etc..
