@@ -1,5 +1,8 @@
 package com.zkdlu.mnm.cart.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +48,73 @@ public class CartService {
 		}
 		
 		return true;
+	}
+
+	public List<Cart> getCartList(String userId) {
+		User user = userRepo.findOneById(userId);
+		if (user == null) {
+			return new ArrayList<Cart>();
+		}
+		
+		return cartRepo.findByUser(user);
+	}
+
+	public Cart getCartOne(String userId, int cartPk) {
+		User user = userRepo.findOneById(userId);
+		if (user == null) {
+			return null;
+		}
+		
+		Cart cart = cartRepo.findById(cartPk).get();
+		if (cart != null &&
+				cart.getUser().getPk() == user.getPk()) {
+			return cart;
+		}
+		
+		return null;
+	}
+
+	public boolean deleteCartOne(String userId, int cartPk) {
+		User user = userRepo.findOneById(userId);
+		if (user == null) {
+			return false;
+		}
+		
+		Cart cart = cartRepo.findById(cartPk).get();
+		if (cart != null &&
+				cart.getUser().getPk() == user.getPk()) {
+			try {
+				cartRepo.delete(cart);
+			} catch (Exception e) {
+				return false;
+			}
+			
+			return true;
+		}
+		
+		return false;
+	}
+
+	public boolean updateCart(String userId, CartDTO cartDTO, int cartPk) {
+		User user = userRepo.findOneById(userId);
+		if (user == null) {
+			return false;
+		}
+		
+		Cart cart = cartRepo.findById(cartPk).get();
+		if (cart != null &&
+				cart.getUser().getPk() == user.getPk()) {
+			try {
+				cart.setCount(cartDTO.getCount());
+				cartRepo.save(cart);
+			} catch (Exception e) {
+				return false;
+			}
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

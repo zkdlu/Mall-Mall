@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +24,7 @@ public class CartController {
 	CartService cartService;
 	
 	@PostMapping("/users/{user_id}/carts")
-	public boolean insertNewProduct(@RequestBody CartDTO cartDTO,
+	public boolean insertCart(@RequestBody CartDTO cartDTO,
 										@PathVariable("user_id") String userId) {
 		if (cartDTO == null) {
 			return false;
@@ -33,33 +35,29 @@ public class CartController {
 	
 	@GetMapping("/users/{user_id}/carts")
 	public List<Cart> getCartList(@PathVariable("user_id") String userId) {
-		System.out.println(userId);
-		
-		List<Cart> carts = new ArrayList<Cart>();
-		Cart cart = new Cart();
-		Article article = new Article();
-		article.setTitle("TEST");
-		cart.setArticle(article);
-		
-		carts.add(cart);
-		
-		return carts;
+		return cartService.getCartList(userId);
 	}
 	
 	@GetMapping(path = "/users/{user_id}/carts/{cart_pk}")
-	public List<Cart> getCart(@PathVariable("user_id") String userId,
+	public Cart getCart(@PathVariable("user_id") String userId,
 				@PathVariable("cart_pk") int cartPk) {
-		System.out.println(userId);
-		System.out.println(cartPk);
+		return cartService.getCartOne(userId, cartPk);
+	}
+	
+	@DeleteMapping(path = "/users/{user_id}/carts/{cart_pk}")
+	public boolean deleteCart(@PathVariable("user_id") String userId,
+				@PathVariable("cart_pk") int cartPk) {
+		return cartService.deleteCartOne(userId, cartPk);
+	}
+	
+	@PutMapping("/users/{user_id}/carts/{cart_pk}")
+	public boolean updateCart(@RequestBody CartDTO cartDTO,
+										@PathVariable("user_id") String userId,
+										@PathVariable("cart_pk") int cartPk) {
+		if (cartDTO == null) {
+			return false;
+		}
 		
-		List<Cart> carts = new ArrayList<Cart>();
-		Cart cart = new Cart();
-		Article article = new Article();
-		article.setTitle("TEST");
-		cart.setArticle(article);
-		
-		carts.add(cart);
-		
-		return carts;
+		return cartService.updateCart(userId, cartDTO, cartPk);
 	}
 }
