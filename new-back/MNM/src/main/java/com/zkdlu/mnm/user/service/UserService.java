@@ -35,6 +35,7 @@ public class UserService {
 		user.setGender(gender);
 		user.setPhoneNum(phoneNum);
 		user.setHomeAddress(homeAddress);
+		user.setState(0);
 		
 		try {
 			if (!isOverlapId(id)) {
