@@ -57,8 +57,7 @@ public class UserService {
 	}
 	
 	public User view (String user_id) {
-		List<User> users = userRepo.findById(user_id);
-		User user = users.get(0);
+		User user = userRepo.findOneById(user_id);
 		return user;
 	}
 	
@@ -70,8 +69,7 @@ public class UserService {
 		String phoneNum = userDTO.getPhone_number();
 		String homeAddress = userDTO.getHome_address();
 		
-		List<User> users = userRepo.findById(id);
-		User user = users.get(0);
+		User user = userRepo.findOneById(id);
 		
 		//하나 하나 체크해주기보단 전체 값이 완성 되있지 않으면 문제가 있는거니까 한번에 처리하는게 좋아 -> 근데 하나만 바꾸고 심ㅍ을수도 있자나요
 		// 그래도 다른 값이 그대로 넘어오니깐 null은 아니지
@@ -108,8 +106,7 @@ public class UserService {
 	
 	
 	public boolean remove(String user_id) {
-		List<User> users = userRepo.findById(user_id);
-		User user = users.get(0);
+		User user = userRepo.findOneById(user_id);
 		user.setState(1);
 		
 		try {
