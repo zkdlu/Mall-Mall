@@ -236,6 +236,7 @@ git diff
 
   ```bash
   git clone 원격 저장소 주소
+  git clone -b 브랜치명 원겨 저장소 주소
   ```
 
 - 원격 브랜치 정보 가져오기
