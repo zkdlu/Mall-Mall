@@ -3,8 +3,10 @@ package com.zkdlu.mnm.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,13 +32,25 @@ public class UserController {
 		return userService.join(userDTO);
 	}
 	
-	//public boolean login(@RequestParam("user_id") String id, @RequestParam("passwd") String passwd) {
 	@PostMapping(path ="/login")
 	public boolean login(@RequestBody UserDTO userDTO) {
-		// user_id와 passwd를 인자로 받아온다.
 		String id = userDTO.getUser_id();
 		String passwd = userDTO.getPasswd();
-		
 		return userService.isMatchUser(id,passwd);
+	}
+	
+	@GetMapping("/users/{user_id}")
+	public User view(@RequestParam("user_id") String id) {
+		return userService.view(id);
+	}
+	
+	@PutMapping(path ="/users/{user_id}")
+	public boolean edit(@RequestBody UserDTO userDTO) {
+		return userService.edit(userDTO);
+	}
+	
+	@DeleteMapping(path ="/users/{user_id}")
+	public boolean remove(@RequestParam("user_id") String id) {
+		return userService.remove(id);
 	}
 }
