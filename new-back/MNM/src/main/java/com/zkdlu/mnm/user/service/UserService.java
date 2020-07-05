@@ -12,6 +12,10 @@ public class UserService {
 	@Autowired
 	UserRepository userRepo;
 	
+	public User authenticate(String id, String passwd) {
+		return userRepo.findOneByIdAndPasswd(id, passwd);
+	}
+	
 	public boolean isOverlapId(String user_id) {
 		return userRepo.findOneById(user_id) != null;
 	}
@@ -101,7 +105,6 @@ public class UserService {
 		} catch (Exception e) {
 			return false;
 		}
-		//이런식으로
 	}
 	
 	
