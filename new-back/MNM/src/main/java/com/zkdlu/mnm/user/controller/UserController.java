@@ -3,6 +3,7 @@ package com.zkdlu.mnm.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,17 +37,21 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/{user_id}")
-	public User view(@RequestParam("user_id") String id) {
+	public User view(@PathVariable("user_id") String id) {
+		System.out.println(id);
 		return userService.view(id);
 	}
 	
 	@PutMapping(path ="/users/{user_id}")
-	public boolean edit(@RequestBody UserDTO userDTO) {
-		return userService.edit(userDTO);
+	public boolean edit(@RequestBody UserDTO userDTO, @PathVariable("user_id") String id) {
+		if (userDTO.getUser_id().equals(id)) {
+			return userService.edit(userDTO);
+		}
+		return false;
 	}
 	
 	@DeleteMapping(path ="/users/{user_id}")
-	public boolean remove(@RequestParam("user_id") String id) {
+	public boolean remove(@PathVariable("user_id") String id) {
 		return userService.remove(id);
 	}
 }
