@@ -16,6 +16,9 @@ export default class Header extends React.Component {
                 <div className='header-nav-item'>
                     <NavLink activeClassName='active-link' to="/login">Login</NavLink>
                 </div>
+                <div className='header-nav-item'>
+                    <NavLink activeClassName='active-link' to="/main">Main</NavLink>
+                </div>
             </div>
         )
     }
