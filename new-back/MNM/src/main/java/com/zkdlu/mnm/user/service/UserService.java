@@ -54,10 +54,10 @@ public class UserService {
 		
 	}
 	
-	public boolean isMatchUser(String user_id, String passwd) {
+	public User MatchUser(String user_id, String passwd) {
 		User user = userRepo.findOneByIdAndPasswd(user_id, passwd);
 		
-		return user != null;
+		return user;
 	}
 	
 	public User view (String user_id) {
