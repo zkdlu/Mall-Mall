@@ -40,13 +40,15 @@ class Login extends Component {
     }
 
     login = async () => {
-        const result = await axios.post(API_URL, {
+        await axios.post(API_URL, {
             user_id: this.state.userId,
             passwd: this.state.password
         }).then(res => {
-            if (res.data === true) {
+            if (res.data != "") {
                 const {cookies} = this.props;
+                cookies.set('userPk', res.data.pk);
                 cookies.set('userId', this.state.userId);
+                cookies.set('userState', res.data.state);
 
                 alert('로그인 성공');
 

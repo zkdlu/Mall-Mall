@@ -15,7 +15,7 @@ class Join extends Component {
     }
 
     checkOverlap = async () => {
-        const result = await axios.get(API_URL + '?user_id=' + this.state.userId) 
+        await axios.get(API_URL + '?user_id=' + this.state.userId) 
             .then(res => { 
                 const id = this.state.userId;
                 this.setState({
@@ -27,7 +27,7 @@ class Join extends Component {
     }
 
     join = async() => {
-        const result = await axios.post(API_URL, {
+        await axios.post(API_URL, {
                 user_id: this.state.userId,
                 passwd: this.state.password,
                 gender: this.state.gender === "Male" ? 1 : 0,
