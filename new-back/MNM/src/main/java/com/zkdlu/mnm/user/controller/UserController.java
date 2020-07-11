@@ -30,10 +30,10 @@ public class UserController {
 	}
 	
 	@PostMapping(path ="/login")
-	public boolean login(@RequestBody UserDTO userDTO) {
+	public User login(@RequestBody UserDTO userDTO) {
 		String id = userDTO.getUser_id();
 		String passwd = userDTO.getPasswd();
-		return userService.isMatchUser(id,passwd);
+		return userService.MatchUser(id,passwd);
 	}
 	
 	@GetMapping("/users/{user_id}")
