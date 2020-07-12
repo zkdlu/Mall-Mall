@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Header from './Header'
+import Container from './Container'
 
-import Header from './Header.js';
-import Container from './Container.js';
-
-class Layout extends Component {
+export default class Layout extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header/>
                 <Container item={this.props.children} />
             </div>
         )
     }
 }
 
-export default Layout;
