@@ -16,6 +16,9 @@ export default class Header extends Component {
                 <div className='header-nav-item'>
                     <NavLink activeClassName='active-link' to="/SignUp">SignUp</NavLink>
                 </div>
+                <div className='header-nav-item'>
+                    <NavLink activeClassName='active-link' to="/article">Article</NavLink>
+                </div>
             </div>
         )
     }

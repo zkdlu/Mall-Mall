@@ -16,7 +16,7 @@ public class SellerService {
 		// TODO Auto-generated method stub
 		User user = userRepo.findOneById(id);
 		if (user != null) {
-			user.setState(1);
+			user.setSeller(true);
 			
 			try {
 				userRepo.save(user);
