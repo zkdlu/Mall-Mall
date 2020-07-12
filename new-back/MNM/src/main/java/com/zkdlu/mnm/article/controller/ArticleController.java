@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zkdlu.mnm.article.dto.ArticleDTO;
@@ -23,37 +24,41 @@ import com.zkdlu.mnm.user.service.UserService;
 
 @RestController
 public class ArticleController {
-	
+
 	@Autowired
 	ArticleService articleService;
-	
+
 	@Autowired
 	UserService userService;
-	
-	@PostMapping(path = "/articles?user_id={0}")
-	public boolean insertArticle(@PathVariable("user_id") String userId, @RequestBody ArticleDTO articleDTO, @RequestBody ProductDTO productDTO) {
-		return articleService.insertArticle(userId,articleDTO,productDTO);
+
+	@PostMapping(path = "/articles")
+	public boolean insertArticle(@RequestParam("user_id") String userId, 
+			@RequestBody ArticleDTO articleDTO) {
+		return articleService.insertArticle(userId, articleDTO);
+	}
+
+//	@DeleteMapping(path ="/articles/{article_pk}")
+//	public boolean deleteArticle(@RequestParam("user_id") String userId,
+//			@PathVariable("article_pk") int articlePk) {
+//		return articleService.deleteArticleOne(userId,articlePk);
+//	}
+
+	@GetMapping("/articles")
+	public List<Article> getArticleList() {
+		return articleService.getArticleList();
 	}
 	
-	@DeleteMapping(path ="/articles/{id}?user_id={0}")
-	public boolean deleteArticle(@PathVariable("user_id") String userId,@PathVariable("article_pk") int articlePk) {
-		return articleService.deleteArticleOne(userId,articlePk);
+	@GetMapping("/articles/{article_pk}")
+	public Article getArticle(@PathVariable("article_pk") int articlePk) {
+		return articleService.getArticle(articlePk);
 	}
-	
-	@GetMapping("/articles/{id}?user_id={0}")
-	public Article getArticle(@PathVariable("user_id") String userId, @PathVariable("article_pk") int articlePk) {
-		return articleService.getArticle(userId,articlePk);
-	}
-	
-	@PutMapping(path ="/articles/{id}?user_id={0}")
-	public boolean updateArticle(@PathVariable("user_id") String userId) {
-		return articleService.updateArticle(userId);
-	}
-	
-	@GetMapping("/articles?user_id={0}")
-	public List<Article> getArticleList(@PathVariable("user_id") String userId) {
-		
-		return articleService.getArticleList(userId);
-	}
-	
+
+//	@PutMapping(path ="/articles/{article_pk}")
+//	public boolean updateArticle(@RequestParam("user_id") String userId,
+//			@PathVariable("article_pk") int articlePk) {
+//		return articleService.updateArticle(userId);
+//	}
+//	
+
+
 }
