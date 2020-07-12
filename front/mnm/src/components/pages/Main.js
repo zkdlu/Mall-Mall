@@ -43,7 +43,7 @@ class Main extends Component {
         if (!cookies.get("userId")) {
             this.props.history.push('/login');
         } else {
-            const isSeller = cookies.get("userState") == 1 ? true : false;
+            const isSeller = cookies.get("userState") === 1 ? true : false;
             this.setState({
                 userId: cookies.get("userId"),
                 isSeller: isSeller

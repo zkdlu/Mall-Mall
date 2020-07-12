@@ -44,7 +44,7 @@ class Login extends Component {
             user_id: this.state.userId,
             passwd: this.state.password
         }).then(res => {
-            if (res.data != "") {
+            if (res.data !== "") {
                 const {cookies} = this.props;
                 cookies.set('userPk', res.data.pk);
                 cookies.set('userId', this.state.userId);
