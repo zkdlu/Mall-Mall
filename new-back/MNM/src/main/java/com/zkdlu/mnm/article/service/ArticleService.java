@@ -110,6 +110,11 @@ public class ArticleService {
 	public Article getArticle(int articlePk) {
 		Article article = articleRepo.findById(articlePk).get();
 		if (article != null) {
+			int hits = article.getHits();
+			article.setHits(hits + 1);
+			
+			articleRepo.save(article);
+			
 			return article;
 		}
 

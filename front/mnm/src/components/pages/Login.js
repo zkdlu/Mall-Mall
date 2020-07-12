@@ -45,10 +45,11 @@ class Login extends Component {
             passwd: this.state.password
         }).then(res => {
             if (res.data !== "") {
+                
                 const {cookies} = this.props;
                 cookies.set('userPk', res.data.pk);
                 cookies.set('userId', this.state.userId);
-                cookies.set('userState', res.data.state);
+                cookies.set('userSeller', res.data.seller);
 
                 alert('로그인 성공');
 

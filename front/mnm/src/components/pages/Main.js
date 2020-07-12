@@ -11,8 +11,7 @@ class Main extends Component {
     };
 
     state = {
-        userId: '',
-        isSeller: false
+        completed: false
     }
 
     logout = () => {
@@ -27,12 +26,14 @@ class Main extends Component {
             user_id: this.state.userId
         }).then(res => {
             if (res.data === true) {
+                const { cookies } = this.props;
+                cookies.set('userSeller', true);
+
                 this.setState({
                     isSeller: true
                 })
 
-                alert(this.state.isSeller);
-                //window.location.reload(false);
+                window.location.reload(false);
             }
         })
     }
@@ -43,11 +44,13 @@ class Main extends Component {
         if (!cookies.get("userId")) {
             this.props.history.push('/login');
         } else {
-            const isSeller = cookies.get("userState") === 1 ? true : false;
+            const isSeller = cookies.get('userSeller') === 'true' ? true : false;
             this.setState({
                 userId: cookies.get("userId"),
-                isSeller: isSeller
+                isSeller: isSeller,
+                completed: true
             })
+
         }
     }
 
@@ -55,10 +58,14 @@ class Main extends Component {
         return (
             <div>
                 <div>
-                    로그인 중이면 유지
-                    아니면 login으로
                     {
-                        this.state.isSeller ? <div>판매자</div> : <input type='button' value='판매자로' onClick={this.getPermission} />
+                        this.state.completed === true ? (
+                            this.state.isSeller === true ?
+                                <div>판매자</div> :
+                                <input type='button' value='판매자로' onClick={this.getPermission} />
+                        ) : (
+                                <div>시발</div>
+                            )
                     }
                 </div>
                 <input type='button' value='로그아웃' onClick={this.logout} />

@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 const API_URL = "http://localhost:8080/articles";
 
 class Article extends Component {
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
     state = {
         isLoaded: false,
-        articles:[]
+        articles: [],
+        isSeller: false
     }
 
     getArticles = async () => {
@@ -21,25 +27,41 @@ class Article extends Component {
     }
 
     componentDidMount() {
+        const { cookies } = this.props;
+
+        const isSeller = cookies.get('userSeller') === 'true' ? true : false;
+        this.setState({
+            isSeller: isSeller
+        });
+
         this.getArticles();
     }
 
     render() {
-        const {isLoaded, articles} = this.state;
+        const { isLoaded, articles, isSeller } = this.state;
         return (
             <div>
-                {
-                    isLoaded ? articles.map((a,i) => {
-                        return (
-                            <div key={i}>
-                                <a href={`/article/${a.pk}`}>{a.title}</a>
-                            </div>
-                        )
-                    }) : '없음'
-                }
+                <div>
+                    {
+                        isLoaded ? articles.map((a, i) => {
+                            return (
+                                <div key={i}>
+                                    <a href={`/article/${a.pk}`}>{a.title}</a>
+                                </div>
+                            )
+                        }) : '없음'
+                    }
+                </div>
+
+                <div>
+                    {
+                        isSeller ? <input type='button' value='제품 등록'/>
+                                : ''
+                    }
+                </div>
             </div>
         )
     }
 }
 
-export default Article;
+export default withCookies(Article);
