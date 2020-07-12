@@ -17,6 +17,8 @@ class Main extends Component {
     logout = () => {
         const { cookies } = this.props;
         cookies.remove('userId');
+        cookies.remove('userPk');
+        cookies.remove('userSeller');
 
         window.location.reload(false);
     }
@@ -50,7 +52,6 @@ class Main extends Component {
                 isSeller: isSeller,
                 completed: true
             })
-
         }
     }
 

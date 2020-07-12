@@ -17,6 +17,7 @@ import com.zkdlu.mnm.category.repo.CategoryRepository;
 import com.zkdlu.mnm.product.dto.ProductDTO;
 import com.zkdlu.mnm.product.model.Product;
 import com.zkdlu.mnm.product.repo.ProductRepository;
+import com.zkdlu.mnm.user.dto.UserDTO;
 import com.zkdlu.mnm.user.model.User;
 import com.zkdlu.mnm.user.repo.UserRepository;
 
@@ -34,8 +35,9 @@ public class ArticleService {
 	@Autowired
 	CategoryRepository categoryRepo;
 
-	public boolean insertArticle(String userId, ArticleDTO articleDTO) {
-		User user = userRepo.findOneById(userId);
+	public boolean insertArticle(ArticleDTO articleDTO) {
+		UserDTO userDTO = articleDTO.getUser();
+		User user = userRepo.findOneById(userDTO.getUser_id());
 
 		if (user == null || user.getState() == 1) {
 			return false;

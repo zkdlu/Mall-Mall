@@ -32,9 +32,8 @@ public class ArticleController {
 	UserService userService;
 
 	@PostMapping(path = "/articles")
-	public boolean insertArticle(@RequestParam("user_id") String userId, 
-			@RequestBody ArticleDTO articleDTO) {
-		return articleService.insertArticle(userId, articleDTO);
+	public boolean insertArticle(@RequestBody ArticleDTO articleDTO) {
+		return articleService.insertArticle(articleDTO);
 	}
 
 //	@DeleteMapping(path ="/articles/{article_pk}")

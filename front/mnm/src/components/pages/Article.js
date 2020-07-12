@@ -26,6 +26,10 @@ class Article extends Component {
             })
     }
 
+    addNewArticle = () => {
+        this.props.history.push('/newarticle');
+    }
+
     componentDidMount() {
         const { cookies } = this.props;
 
@@ -55,7 +59,7 @@ class Article extends Component {
 
                 <div>
                     {
-                        isSeller ? <input type='button' value='제품 등록'/>
+                        isSeller ? <input type='button' value='제품 등록' onClick={this.addNewArticle}/>
                                 : ''
                     }
                 </div>
