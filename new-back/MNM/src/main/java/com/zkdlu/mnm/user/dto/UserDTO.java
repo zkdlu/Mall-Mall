@@ -6,6 +6,7 @@ public class UserDTO {
 	private int gender;
 	private String home_address;
 	private String phone_number;
+	private boolean isSeller;
 	private int state;
 
 	public String getUser_id() {
@@ -46,6 +47,14 @@ public class UserDTO {
 
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
+	}
+	
+	public boolean isSeller() {
+		return isSeller;
+	}
+
+	public void setSeller(boolean isSeller) {
+		this.isSeller = isSeller;
 	}
 	
 	public int getState() {

@@ -32,6 +32,9 @@ public class User {
 
 	@Column(name = "phoneNum")
 	private String phoneNum;
+	
+	@Column(name = "isSeller")
+	private boolean isSeller;
 
 	@Column(name = "state")
 	private int state;
@@ -82,6 +85,15 @@ public class User {
 
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
+	}
+	
+
+	public boolean isSeller() {
+		return isSeller;
+	}
+
+	public void setSeller(boolean isSeller) {
+		this.isSeller = isSeller;
 	}
 
 	public int getState() {
