@@ -13,8 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
-
+import { login } from '../../../services/UserApi';
 
 function Copyright() {
   return (
@@ -58,24 +57,20 @@ class SignIn extends React.Component {
     }
   }
 
-  login = async() => {
+  login = async () => {
     const { user_id, password } = this.state;
     console.log("login", user_id, password)
-    if('' === user_id.trim() || '' === password.trim()) {
+    if ('' === user_id.trim() || '' === password.trim()) {
       alert("정확히 입력해주세요.");
     } else {
-      await axios.post("http://localhost:8080/login",
-      {
-        user_id: user_id,
-        passwd: password
-      })
-      .then(res => {
-        if(res.data === true) {
-          this.props.history.push("/");
-        } else {
-          alert("로그인 실패");
+      await login(user_id, password)
+        .then(res => {
+          if (res.data === true) {
+            this.props.history.push("/");
+          } else {
+            alert("로그인 실패");
           }
-      })
+        })
     }
   }
 
@@ -83,7 +78,7 @@ class SignIn extends React.Component {
     const id = event.target.name;
     const value = event.target.value;
 
-    this.setState({ [id]: value});
+    this.setState({ [id]: value });
   }
 
   render() {
@@ -134,7 +129,7 @@ class SignIn extends React.Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={ this.login }
+              onClick={this.login}
             >
               Sign In
           </Button>
