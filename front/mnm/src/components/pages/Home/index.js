@@ -9,12 +9,15 @@ class Home extends Component {
     getArticles = async () => {
         await Api_getArticles()
             .then(res => {
-                console.log(res.data);
                 this.setState({
                     isLoaded: true,
                     articles: res.data
                 })
             });
+    }
+
+    addArticle = () => {
+        this.props.history.push('/newarticle');
     }
 
     componentDidMount() {
@@ -24,7 +27,7 @@ class Home extends Component {
     render() {
         const { isLoaded, articles } = this.state;
         return (
-            <div> 
+            <div>
                 {
                     isLoaded ? articles.map((a, i) => {
                         return (
@@ -34,6 +37,9 @@ class Home extends Component {
                         )
                     }) : 'empty'
                 }
+                <div>
+                    <input type='button' value='제품 등록' onClick={this.addArticle} />
+                </div>
             </div>
         );
     }
