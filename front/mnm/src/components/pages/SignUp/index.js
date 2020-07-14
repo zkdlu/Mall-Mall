@@ -21,27 +21,14 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import { InputAdornment } from '@material-ui/core';
 import { checkOverlap, join } from '../../../services/UserApi';
-function CheckIdIcon(overlap) {
+import Copyright from '../../Copyright'
 
-  console.log("checkIdIcon", overlap)
-  if (overlap === true) {
+function CheckIdIcon(overlap) {
+  if (overlap.overlap === false) {
     return (<CheckCircleIcon style={{ color: green[500] }} />);
   } else {
     return (<ErrorIcon style={{ color: red[500] }} />);
   }
-}
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
 }
 
 const useStyles = theme => ({
@@ -101,7 +88,6 @@ class SignUp extends React.Component {
     if ('' === name.trim() || '' === user_id.trim() || '' === password.trim() || '' === gender.trim() || '' === home_address.trim() || '' === phone_number.trim()) {
       alert("회원 가입 실패");
     } else {
-
       join(name, user_id, password, gender, home_address, phone_number)
         .then(res => {
           if (res.data === true) {
@@ -120,7 +106,7 @@ class SignUp extends React.Component {
   handleChange = event => {
     const id = event.target.name;
     const value = event.target.value;
-
+    
     this.setState({ [id]: value });
   }
 

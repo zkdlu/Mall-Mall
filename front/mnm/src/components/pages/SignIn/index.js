@@ -14,19 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { login } from '../../../services/UserApi';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../../Copyright'
 
 const useStyles = theme => ({
   paper: {
@@ -65,7 +53,7 @@ class SignIn extends React.Component {
     } else {
       await login(user_id, password)
         .then(res => {
-          if (res.data === true) {
+          if (res.data !== "") {
             this.props.history.push("/");
           } else {
             alert("로그인 실패");
