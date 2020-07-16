@@ -23,7 +23,7 @@ export function join(name, user_id, password, gender, home_address, phone_number
 }
 
 export function login(user_id, password) {
-  return axios.post("http://localhost:8080/login", {
+  return axios.post(`${ApiConfig.API_URL}/login`, {
     user_id: user_id,
     passwd: password
   });
